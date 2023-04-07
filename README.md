@@ -1,5 +1,8 @@
 # JSON:API Locale Info
 
+[![Lint & Test](https://github.com/wunderwerkio/drupal-jsonapi-locale-info/actions/workflows/main.yml/badge.svg)](https://github.com/wunderwerkio/drupal-jsonapi-locale-info/actions/workflows/main.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=wunderwerkio_drupal-jsonapi-locale-info&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=wunderwerkio_drupal-jsonapi-locale-info)
+
 This module adds localization metadata to JSON:API resources
 that support translation and have path aliases enabled.
 
