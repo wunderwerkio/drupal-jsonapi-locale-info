@@ -1,0 +1,7 @@
+name: JSON:API Locale Info
+type: module
+description: Adds alternative locale paths to localized resources.
+core_version_requirement: ^9 || ^10
+package: Web services
+dependencies:
+  - drupal:jsonapi

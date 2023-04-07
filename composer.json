@@ -1,0 +1,13 @@
+{
+    "name": "drupal/jsonapi_locale_info",
+    "description": "Adds locale info to JSON:API responses.",
+    "type": "drupal-module",
+    "require": {
+        "php": ">=8.0",
+        "drupal/jsonapi_extras": "^3.23"
+    },
+    "require-dev": {
+        "phpspec/prophecy-phpunit": "^2"
+    },
+    "license": "GPL-2.0-or-later"
+}

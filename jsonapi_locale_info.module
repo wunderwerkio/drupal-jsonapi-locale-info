@@ -1,0 +1,67 @@
+<?php
+
+/**
+ * @file
+ * Module implementation file.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\NodeInterface;
+use Drupal\path_alias\PathAliasInterface;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function jsonapi_locale_info_path_alias_insert(EntityInterface $entity) {
+  if ($entity instanceof PathAliasInterface) {
+    _jsonapi_locale_info_invalidate_path_alias_target_cache($entity->getPath());
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ */
+function jsonapi_locale_info_path_alias_update(EntityInterface $entity) {
+  if ($entity instanceof PathAliasInterface) {
+    _jsonapi_locale_info_invalidate_path_alias_target_cache($entity->getPath());
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ */
+function jsonapi_locale_info_path_alias_delete(EntityInterface $entity) {
+  if ($entity instanceof PathAliasInterface) {
+    _jsonapi_locale_info_invalidate_path_alias_target_cache($entity->getPath());
+  }
+}
+
+/**
+ * Invalidate cache of path alias target entity.
+ *
+ * Uses the drupal access aware router to resolve the given
+ * internal path (e.g. /node/1) to an entity and invalidate its cache tags.
+ *
+ * Currently only supports nodes.
+ *
+ * @param string $path
+ *   The internal path to resolve.
+ */
+function _jsonapi_locale_info_invalidate_path_alias_target_cache(string $path) {
+  $cacheTagInvalidator = \Drupal::service('cache_tags.invalidator');
+  $router = \Drupal::service('router');
+  $params = $router->match($path);
+
+  if (isset($params['node']) && $params['node'] instanceof NodeInterface) {
+    /** @var \Drupal\node\NodeInterface $node */
+    $node = $params['node'];
+
+    $tags = $node->getCacheTagsToInvalidate();
+    $cacheTagInvalidator->invalidateTags($tags);
+
+    \Drupal::logger('jsonapi_locale_info')->debug('Invalidated cache tags for node %nid: %tags', [
+      '%nid' => $node->id(),
+      '%tags' => implode(', ', $tags),
+    ]);
+  }
+}
