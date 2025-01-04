@@ -1,3 +1,10 @@
+# Important Notice
+
+The version control was moved to Drupal's GitLab instance!  
+See https://www.drupal.org/project/jsonapi_locale_info for more info!
+
+---
+
 # JSON:API Locale Info
 
 [![Lint & Test](https://github.com/wunderwerkio/drupal-jsonapi-locale-info/actions/workflows/main.yml/badge.svg)](https://github.com/wunderwerkio/drupal-jsonapi-locale-info/actions/workflows/main.yml)
